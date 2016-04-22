@@ -1,9 +1,9 @@
 import {AppStore} from "./app-store";
 import {createStore, combineReducers, applyMiddleware, compose} from "redux";
-import * as thunkMiddleware from "redux-thunk"
+import * as thunkMiddleware from "redux-thunk";
 
 /* tslint:disable */
-export function applyDevTools(debug) {
+export function applyDevTools(debug?) {
   // default to window query param
   let isDebug = false;
   // allow overriding with a boolean or function
@@ -23,7 +23,7 @@ export function applyDevTools(debug) {
   return isDebug ? window["devToolsExtension"]() : f => f;
 }
 /* tslint:enable */
- 
+
 /**
  * Factory for app store
  */
@@ -36,7 +36,7 @@ export function createAppStoreFactory(reducers?, additionalMiddlewares?) {
 
 export function createAppStoreFactoryWithOptions({
                     reducers,
-                    additionalMiddlewares = [],
+                    additionalMiddlewares = <Array<Redux.Middleware>> [],
                     debug = undefined
                   }) {
 
@@ -46,16 +46,16 @@ export function createAppStoreFactoryWithOptions({
         let reducersToUse = reducers;
         if (typeof reducersToUse === "object") {
             // it's not a single reducer so we need to combine the reducers on the object properties
-            reducersToUse = combineReducers(reducersToUse);
+            reducersToUse = combineReducers(<Object> reducersToUse);
         }
 
-        let thunkMiddlewareToUse = thunkMiddleware;
+        let thunkMiddlewareToUse = <ReduxThunk.Thunk | {default:ReduxThunk.Thunk}> thunkMiddleware;
         // Fix for import issues
         if (thunkMiddlewareToUse && thunkMiddlewareToUse["default"]) {
             thunkMiddlewareToUse = thunkMiddlewareToUse["default"];
         }
 
-        const middlewareEnhancer = applyMiddleware(thunkMiddlewareToUse,...additionalMiddlewares);
+        const middlewareEnhancer = applyMiddleware(<ReduxThunk.Thunk> thunkMiddlewareToUse,...additionalMiddlewares);
         const enhancers = compose(middlewareEnhancer, applyDevTools(debug));
         const createStoreWithEnhancers = enhancers(createStore);
 

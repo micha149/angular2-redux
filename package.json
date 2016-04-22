@@ -68,7 +68,7 @@
     "tslint": "^3.2.1",
     "tslint-stylish": "^2.1.0-beta",
     "typescript": "^1.8",
-    "zone.js": "^0.6.10"
+    "zone.js": "^0.6.11"
   },
   "config": {
     "commitizen": {

@@ -4,9 +4,9 @@ import {createStore} from "redux";
 
 
 const createSimpleAppStore = () => {
-  return new AppStore(createStore((state=0,action) => {
+  return new AppStore(createStore((state: number = 0, action) => {
       if (action.type=="inc") {
-        return state+1;
+        return state + 1;
       } else {
         return state;
       }

@@ -20,7 +20,7 @@ export function main() {
         devToolsMiddleware: ()=>{}
       };
       spyOn(wrapper, "devToolsMiddleware");
-      const devToolsMiddlewareSpy = wrapper.devToolsMiddleware;
+      const devToolsMiddlewareSpy = <jasmine.Spy>wrapper.devToolsMiddleware;
 
       window["devToolsExtension"]= ()=>wrapper.devToolsMiddleware;
 

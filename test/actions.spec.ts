@@ -40,7 +40,7 @@ export function main() {
       dispatcherFunction("a");
       dispatcherFunction("b");
 
-      const dispatchSpy = appStoreMock.dispatch;
+      const dispatchSpy = <jasmine.Spy>appStoreMock.dispatch;
       expect(dispatchSpy).toHaveBeenCalled();
       expect(dispatchSpy.calls.count()).toEqual(2);
       expect(dispatchSpy.calls.argsFor(0)[0]).toEqual({type: "1",data: "a"});
@@ -59,7 +59,7 @@ export function main() {
 
       dispatcherFunction("yo");
 
-      const dispatchSpy = appStoreMock.dispatch;
+      const dispatchSpy = <jasmine.Spy>appStoreMock.dispatch;
       expect(dispatchSpy).toHaveBeenCalled();
       expect(dispatchSpy.calls.count()).toEqual(1);
       expect(dispatchSpy.calls.argsFor(0)[0]).toEqual({type: "a",data: "yo"});

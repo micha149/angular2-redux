@@ -18,7 +18,7 @@ export class AppStore {
     /**
      * Create a dispatcher as a curried function using the passed in action creator and an optional context
      */
-    public createDispatcher:(actionCreator, context)=>(...n:any[])=>void;
+    public createDispatcher:(actionCreator:Function, context?:{}) => () => void;
 
     constructor(store:any) {
         this.getState = () => {
